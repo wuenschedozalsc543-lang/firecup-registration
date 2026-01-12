@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 核心移动端适配：强制屏幕宽度=device-width，禁止用户缩放 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>无畏契约Fire杯 - 官方报名通道</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Microsoft YaHei", Arial, sans-serif;
+        }
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px; /* 移动端基础字号，保证可读性 */
+        }
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: #fff;
+            padding: 15px 0; /* 移动端减少上下内边距 */
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 1.6rem; /* 移动端缩小标题字号 */
+            margin-bottom: 8px;
+            padding: 0 10px; /* 防止标题超出屏幕 */
+        }
+        .header p {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            padding: 0 10px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 15px auto; /* 移动端减少上下外边距 */
+            padding: 0 10px; /* 移动端缩小左右内边距 */
+        }
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px 15px; /* 移动端减少内边距 */
+            margin-bottom: 15px; /* 移动端减少卡片间距 */
+            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+        }
+        .card h2 {
+            color: #1e3c72;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #eee;
+            font-size: 1.3rem; /* 移动端缩小副标题字号 */
+        }
+        .btn {
+            display: inline-block;
+            background: #2a5298;
+            color: #fff;
+            padding: 12px 0; /* 移动端调整按钮内边距，宽度100%更易点击 */
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1rem;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s;
+            width: 100%; /* 移动端按钮全屏宽，方便点击 */
+            text-align: center;
+            margin-bottom: 10px; /* 按钮之间增加间距 */
+        }
+        .btn:hover {
+            background: #1e3c72;
+        }
+        .btn-secondary {
+            background: #6c757d;
+        }
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        .form-group {
+            margin-bottom: 15px; /* 移动端减少表单组间距 */
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #495057;
+            font-size: 0.95rem;
+        }
+        .form-control {
+            width: 100%;
+            padding: 12px 10px; /* 移动端调整输入框内边距 */
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.95rem; /* 移动端输入框字号适配 */
+            transition: border 0.3s;
+            -webkit-appearance: none; /* 去除iOS默认样式 */
+        }
+        .form-control:focus {
+            outline: none;
+            border-color: #2a5298;
+            box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.1);
+        }
+        /* 移动端表格适配：横向滚动，防止内容挤压 */
+        .table-wrapper {
+            overflow-x: auto; /* 表格超出屏幕可横向滑动 */
+            margin: 20px 0;
+            -webkit-overflow-scrolling: touch; /* iOS顺滑滚动 */
+        }
+        .table {
+            width: 100%;
+            min-width: 600px; /* 保证表格列不挤压 */
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            padding: 10px 8px; /* 移动端减少表格内边距 */
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            font-size: 0.9rem; /* 移动端表格字号缩小 */
+        }
+        .table th {
+            background-color: #f8f9fa;
+            color: #2a5298;
+            white-space: nowrap; /* 表头文字不换行 */
+        }
+        .tab-container {
+            margin: 15px 0;
+        }
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 15px;
+            overflow-x: auto; /* 标签超出可横向滑动 */
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none; /* 隐藏滚动条 */
+        }
+        .tabs::-webkit-scrollbar {
+            display: none; /* 隐藏iOS滚动条 */
+        }
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            white-space: nowrap; /* 标签文字不换行 */
+            flex-shrink: 0; /* 标签不被挤压 */
+        }
+        .tab.active {
+            border-bottom-color: #2a5298;
+            color: #2a5298;
+            font-weight: 500;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .notice {
+            background-color: #e8f4f8;
+            border-left: 4px solid #4299e1;
+            padding: 12px 10px; /* 移动端减少提示框内边距 */
+            margin: 15px 0;
+            border-radius: 0 5px 5px 0;
+            font-size: 0.95rem;
+        }
+        .notice h4 {
+            color: #2a5298;
+            margin-bottom: 6px;
+            font-size: 1rem;
+        }
+        .contact-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+        .contact-list li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+        .contact-list li span {
+            font-weight: 500;
+            color: #2a5298;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px 0;
+            color: #6c757d;
+            background-color: #fff;
+            margin-top: 30px;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            padding: 0 10px;
+        }
+        /* 修复原代码中表格th标签错误 */
+        th {
+            font-weight: 500;
+        }
+        /* 移动端单选框/复选框适配 */
+        input[type="radio"], input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-right: 5px;
+        }
+        /* 适配小屏手机（如iPhone SE） */
+        @media (max-width: 375px) {
+            .header h1 {
+                font-size: 1.4rem;
+            }
+            .form-control {
+                padding: 10px 8px;
+            }
+            .table th, .table td {
+                padding: 8px 5px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <div class="header">
+        <h1>无畏契约Fire杯 官方报名通道</h1>
+        <p>填写报名表，解锁电竞热血之旅 | 报名截止日期：2024年X月X日</p>
+    </div>
+
+    <!-- 核心内容区 -->
+    <div class="container">
+        <!-- 报名指引卡片 -->
+        <div class="card">
+            <h2>报名流程指引</h2>
+            <div class="notice">
+                <h4>📌 重要提示</h4>
+                <p>1. 战队人数需满足5-7人（含队长），所有成员需年满18周岁；</p>
+                <p>2. 报名需提交真实信息，游戏账号需为国服实名账号（无封禁记录）；</p>
+                <p>3. 报名表可选择「线上填写提交」或「下载表格邮件发送」，二选一即可。</p>
+            </div>
+            <div style="text-align: center; margin: 20px 0;">
+                <a href="#form" class="btn">立即线上报名</a>
+                <a href="#download" class="btn btn-secondary">下载报名表</a>
+            </div>
+        </div>
+
+        <!-- 标签页内容（报名表单/提交说明/咨询入口） -->
+        <div class="card">
+            <div class="tab-container">
+                <div class="tabs">
+                    <div class="tab active" data-tab="form">线上报名表单</div>
+                    <div class="tab" data-tab="submit">提交要求说明</div>
+                    <div class="tab" data-tab="contact">咨询联系方式</div>
+                </div>
+
+                <!-- 线上报名表单 -->
+                <div class="tab-content active" id="form">
+                    <h3>战队基础信息</h3>
+                    <form id="registrationForm" action="mailto:2823259492@qq.com" method="post" enctype="text/plain">
+                        <div class="form-group">
+                            <label for="teamName">战队名称</label>
+                            <input type="text" class="form-control" id="teamName" name="teamName" required placeholder="不得含侵权、色情、反动、低俗及广告信息">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamSize">战队人数</label>
+                            <input type="number" class="form-control" id="teamSize" name="teamSize" required min="5" max="7" placeholder="5-7人（含队长）">
+                        </div>
+                        <div class="form-group">
+                            <label for="captainName">队长姓名</label>
+                            <input type="text" class="form-control" id="captainName" name="captainName" required placeholder="需为战队注册成员">
+                        </div>
+                        <div class="form-group">
+                            <label for="captainPhone">队长联系电话</label>
+                            <input type="tel" class="form-control" id="captainPhone" name="captainPhone" required placeholder="确保24小时畅通">
+                        </div>
+                        <div class="form-group">
+                            <label for="captainQQ">队长QQ账号</label>
+                            <input type="text" class="form-control" id="captainQQ" name="captainQQ" required placeholder="需与游戏账号绑定">
+                        </div>
+                        <div class="form-group">
+                            <label for="captainEmail">队长电子邮箱</label>
+                            <input type="email" class="form-control" id="captainEmail" name="captainEmail" required placeholder="用于接收赛事规则、赛程等文件">
+                        </div>
+                        <div class="form-group">
+                            <label for="teamSlogan">战队口号（可选）</label>
+                            <input type="text" class="form-control" id="teamSlogan" name="teamSlogan" maxlength="20" placeholder="积极健康正能量，不超过20字">
+                        </div>
+
+                        <h3 style="margin: 20px 0 15px; font-size: 1.2rem;">战队成员详情（含队长）</h3>
+                        <!-- 表格外层增加滚动容器，适配移动端 -->
+                        <div class="table-wrapper">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>序号</th>
+                                        <th>姓名</th>
+                                        <th>游戏账号（QQ号）</th>
+                                        <th>游戏昵称</th>
+                                        <th>段位</th>
+                                        <th>角色定位</th>
+                                        <th>是否替补</th>
+                                        <th>联系方式</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- 成员1（队长） -->
+                                    <tr>
+                                        <td>1</td>
+                                        <td><input type="text" class="form-control" name="memberName1" required></td>
+                                        <td><input type="text" class="form-control" name="memberQQ1" required></td>
+                                        <td><input type="text" class="form-control" name="memberNick1" required></td>
+                                        <td><input type="text" class="form-control" name="memberRank1" required placeholder="如：铂金3"></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole1" required>
+                                                <option value="">选择定位</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub1" value="否" checked> 否</label>
+                                            <label><input type="radio" name="isSub1" value="是" style="margin-left: 10px;"> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact1" required></td>
+                                    </tr>
+                                    <!-- 成员2-5（必填） -->
+                                    <tr>
+                                        <td>2</td>
+                                        <td><input type="text" class="form-control" name="memberName2" required></td>
+                                        <td><input type="text" class="form-control" name="memberQQ2" required></td>
+                                        <td><input type="text" class="form-control" name="memberNick2" required></td>
+                                        <td><input type="text" class="form-control" name="memberRank2" required></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole2" required>
+                                                <option value="">选择定位</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub2" value="否" checked> 否</label>
+                                            <label><input type="radio" name="isSub2" value="是" style="margin-left: 10px;"> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact2" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td><input type="text" class="form-control" name="memberName3" required></td>
+                                        <td><input type="text" class="form-control" name="memberQQ3" required></td>
+                                        <td><input type="text" class="form-control" name="memberNick3" required></td>
+                                        <td><input type="text" class="form-control" name="memberRank3" required></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole3" required>
+                                                <option value="">选择定位</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub3" value="否" checked> 否</label>
+                                            <label><input type="radio" name="isSub3" value="是" style="margin-left: 10px;"> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact3" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td><input type="text" class="form-control" name="memberName4" required></td>
+                                        <td><input type="text" class="form-control" name="memberQQ4" required></td>
+                                        <td><input type="text" class="form-control" name="memberNick4" required></td>
+                                        <td><input type="text" class="form-control" name="memberRank4" required></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole4" required>
+                                                <option value="">选择定位</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub4" value="否" checked> 否</label>
+                                            <label><input type="radio" name="isSub4" value="是" style="margin-left: 10px;"> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact4" required></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td><input type="text" class="form-control" name="memberName5" required></td>
+                                        <td><input type="text" class="form-control" name="memberQQ5" required></td>
+                                        <td><input type="text" class="form-control" name="memberNick5" required></td>
+                                        <td><input type="text" class="form-control" name="memberRank5" required></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole5" required>
+                                                <option value="">选择定位</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub5" value="否" checked> 否</label>
+                                            <label><input type="radio" name="isSub5" value="是" style="margin-left: 10px;"> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact5" required></td>
+                                    </tr>
+                                    <!-- 成员6-7（可选） -->
+                                    <tr>
+                                        <td>6</td>
+                                        <td><input type="text" class="form-control" name="memberName6" placeholder="可选，替补成员"></td>
+                                        <td><input type="text" class="form-control" name="memberQQ6" placeholder="可选"></td>
+                                        <td><input type="text" class="form-control" name="memberNick6" placeholder="可选"></td>
+                                        <td><input type="text" class="form-control" name="memberRank6" placeholder="可选"></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole6">
+                                                <option value="">选择定位（可选）</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub6" value="否"> 否</label>
+                                            <label><input type="radio" name="isSub6" value="是" checked> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact6" placeholder="可选"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td><input type="text" class="form-control" name="memberName7" placeholder="可选，替补成员"></td>
+                                        <td><input type="text" class="form-control" name="memberQQ7" placeholder="可选"></td>
+                                        <td><input type="text" class="form-control" name="memberNick7" placeholder="可选"></td>
+                                        <td><input type="text" class="form-control" name="memberRank7" placeholder="可选"></td>
+                                        <td>
+                                            <select class="form-control" name="memberRole7">
+                                                <option value="">选择定位（可选）</option>
+                                                <option value="决斗">决斗</option>
+                                                <option value="先锋">先锋</option>
+                                                <option value="控场">控场</option>
+                                                <option value="哨卫">哨卫</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <label><input type="radio" name="isSub7" value="否"> 否</label>
+                                            <label><input type="radio" name="isSub7" value="是" checked> 是</label>
+                                        </td>
+                                        <td><input type="text" class="form-control" name="memberContact7" placeholder="可选"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 style="margin: 20px 0 15px; font-size: 1.2rem;">参赛资格声明</h3>
+                        <div class="form-group">
+                            <label style="font-size: 0.95rem; line-height: 1.5;">
+                                <input type="checkbox" name="agreement" required> 本人代表战队确认：所有成员均年满18周岁，身份信息真实有效，无腾竞职业体系注册经历，符合参赛资格；承诺遵守赛事规则，无冒名顶替、开挂等违规行为，同意主办方对赛事相关资料的宣传使用权。
+                            </label>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="submitDate">报名日期</label>
+                            <input type="date" class="form-control" id="submitDate" name="submitDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="captainSign">队长签字（电子签名）</label>
+                            <input type="text" class="form-control" id="captainSign" name="captainSign" required placeholder="输入队长姓名即可">
+                        </div>
+
+                        <div style="text-align: center; margin: 20px 0;">
+                            <button type="submit" class="btn">提交报名表</button>
+                            <button type="reset" class="btn btn-secondary">重置表单</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 提交要求说明 -->
+                <div class="tab-content" id="submit">
+                    <h3 style="font-size: 1.2rem;">报名表提交方式</h3>
+                    <div id="download" class="notice">
+                        <h4>📎 方式一：下载表格邮件发送</h4>
+                        <p>1. 下载报名表模板：<a href="javascript:alert('报名表模板将发送至您的邮箱，请留下联系方式')" class="btn btn-secondary" style="padding: 5px 15px; font-size: 0.9rem; display: inline-block; width: auto;">点击下载</a></p>
+                        <p>2. 填写完整后，发送至主办方指定邮箱：<strong>2823259492@qq.com</strong></p>
+                        <p>3. 邮件主题格式：<strong>Fire杯-战队名称-参赛赛道</strong>（如：Fire杯-巅峰战队-大众赛道）</p>
+                    </div>
+                    <div class="notice" style="margin-top: 15px;">
+                        <h4>📎 方式二：线上填写直接提交</h4>
+                        <p>1. 通过「线上报名表单」填写所有信息，确认无误后点击「提交报名表」；</p>
+                        <p>2. 提交后系统将自动发送表单至主办方邮箱，同时会向队长邮箱发送确认邮件；</p>
+                        <p>3. 若未收到确认邮件，请检查垃圾邮箱或联系咨询人员。</p>
+                    </div>
+                    <h3 style="margin: 20px 0 15px; font-size: 1.2rem;">提交注意事项</h3>
+                    <ul style="margin-left: 15px; line-height: 1.8; font-size: 0.95rem;">
+                        <li>逾期提交、信息不全或虚假填报的报名表，视为无效报名；</li>
+                        <li>游戏账号报名后不可更换，需确保账号状态良好（无作弊、封禁记录）；</li>
+                        <li>替补成员如需登场，需至少提前6小时告知主办方；</li>
+                        <li>审核结果将在提交后3个工作日内通过电话/QQ/邮箱通知，请保持联系方式畅通。</li>
+                    </ul>
+                </div>
+
+                <!-- 咨询联系方式 -->
+                <div class="tab-content" id="contact">
+                    <h3 style="font-size: 1.2rem;">官方咨询渠道</h3>
+                    <ul class="contact-list">
+                        <li><span>咨询微信：</span>Xiaozeek、liyz71（添加时备注「Fire杯报名咨询」）</li>
+                        <li><span>咨询QQ：</span>2823259492、2510299941（可加入赛事咨询群）</li>
+                        <li><span>报名邮箱：</span>2823259492@qq.com（仅接收报名表，咨询请走上述渠道）</li>
+                        <li><span>咨询时间：</span>每日10:00-22:00（节假日不休）</li>
+                    </ul>
+                    <div class="notice">
+                        <h4>❓ 常见问题</h4>
+                        <p>Q：段位是否有要求？<br>A：无强制段位限制，需确保账号真实有效，符合参赛资格。</p>
+                        <p>Q：可以更换队员吗？<br>A：报名后不可更换队员，替补成员需提前登记并按要求报备。</p>
+                        <p>Q：未收到审核结果怎么办？<br>A：可通过咨询渠道反馈，提供战队名称和队长联系方式查询。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 页脚 -->
+    <div class="footer">
+        <p>© 2024 无畏契约Fire杯赛事组委会 版权所有 | 赛事规则最终解释权归主办方所有</p>
+        <p>联系地址：XXX（可选） | 投诉建议：XXX（可选）</p>
+    </div>
+
+    <!-- JavaScript 交互逻辑 -->
+    <script>
+        // 标签页切换
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                tab.classList.add('active');
+                const targetTab = tab.getAttribute('data-tab');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // 表单提交提示
+        const form = document.getElementById('registrationForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('报名表提交成功！主办方将在3个工作日内审核并通知结果，请保持联系方式畅通～');
+            this.reset();
+        });
+
+        // 自动填充当前日期
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('submitDate').value = today;
+
+        // 移动端输入框聚焦时，防止页面上移过多
+        const inputs = document.querySelectorAll('.form-control');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                setTimeout(() => {
+                    input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 100);
+            });
+        });
+    </script>
+</body>
+</html>
